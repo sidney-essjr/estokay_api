@@ -26,6 +26,9 @@ public class AuditLog {
     @Column(name = "created_in", nullable = false)
     private LocalDateTime createdIn;
 
+    @Column(name = "created_by", nullable = false)
+    private String createdBy;
+
     @Column(name = "changed_at", nullable = false)
     private LocalDateTime changedAt;
 
