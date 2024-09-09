@@ -1,18 +1,16 @@
 package com.estokay.api.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "People")
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
-public class Person {
+@Getter @Setter
+@DiscriminatorColumn(name = "dtype")
+@AllArgsConstructor @NoArgsConstructor
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class Person {
 
     @Id
     @Column(name = "id")
@@ -42,29 +40,6 @@ public class Person {
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
-
-    @Column(name = "record_id")
-    private long recordId;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "Operation", nullable = false, length = 20)
-    private Operation operationType = Operation.UNCHANGED;
-
-    @Column(name = "created_in", nullable = false)
-    private LocalDateTime createdIn;
-
-    @Column(name = "changed_at", nullable = false)
-    private LocalDateTime changedAt;
-
-    @Column(name = "changed_by", nullable = false)
-    private String changedBy;
-
-    @Column(name = "old_value")
-    private String oldValue;
-
-    public enum Operation {
-        INSERT, UPDATE, DELETE, UNCHANGED
-    }
 
     @Override
     public boolean equals(Object o) {
