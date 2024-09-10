@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/donors")
@@ -26,7 +28,22 @@ public class DonorController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DonorResponseDto> getById(@PathVariable long id) {
-        Donor donor = donorService.getById(id);
+        Donor donor = donorService.findById(id);
         return ResponseEntity.ok(DonorMapper.toDto(donor));
     }
+
+    @GetMapping
+    public ResponseEntity<List<DonorResponseDto>> findAll() {
+        List<Donor> donors = donorService.findAll();
+        return ResponseEntity.ok(DonorMapper.toListDto(donors));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable long id, @Valid @RequestBody DonorCreateDto dto) {
+        donorService.update(id, dto);
+        return ResponseEntity.noContent().build();
+    }
+
+
+
 }
