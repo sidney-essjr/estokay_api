@@ -29,7 +29,7 @@ public abstract class Person {
     @Column(name = "code", nullable = true, length = 20)
     private String code;
 
-    @Column(name = "address", nullable = false, length = 255)
+    @Column(name = "address", length = 255)
     private String address;
 
     @Column(name = "city", nullable = false, length = 255)
