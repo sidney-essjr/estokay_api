@@ -54,6 +54,12 @@ public class DonorService {
         donor.setDonationsMade(donor.getDonationsMade() + 1);
     }
 
+    @Transactional
+    public void swapIsActive(long id) {
+        Donor donor = findById(id);
+        donor.setActive(!donor.isActive());
+    }
+
     private String[] getNullPropertyNames(Object source) {
         final BeanWrapper src = new BeanWrapperImpl(source);
         java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();

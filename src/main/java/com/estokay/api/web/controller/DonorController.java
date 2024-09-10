@@ -50,4 +50,10 @@ public class DonorController {
         return ResponseEntity.noContent().build();
     }
 
+    @PatchMapping("/{id}/swap-is-active")
+    public ResponseEntity<Void> swapIsActive(@PathVariable long id) {
+        donorService.swapIsActive(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
