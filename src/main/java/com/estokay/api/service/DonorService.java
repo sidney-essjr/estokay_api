@@ -2,6 +2,7 @@ package com.estokay.api.service;
 
 import com.estokay.api.entity.Donor;
 import com.estokay.api.exception.EmailUniqueViolationException;
+import com.estokay.api.exception.EntityNotFoundException;
 import com.estokay.api.repository.DonorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,4 +23,9 @@ public class DonorService {
         }
     }
 
+    public Donor getById(long id) {
+        return donorRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("The id entity %d was not found", id))
+        );
+    }
 }
