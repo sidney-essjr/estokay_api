@@ -3,6 +3,7 @@ package com.estokay.api.web.controller;
 import com.estokay.api.entity.Donor;
 import com.estokay.api.service.DonorService;
 import com.estokay.api.web.dto.DonorCreateDto;
+import com.estokay.api.web.dto.DonorResponseDto;
 import com.estokay.api.web.dto.mapper.DonorMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,8 @@ public class DonorController {
     private final DonorService donorService;
 
     @PostMapping
-    public ResponseEntity<Donor> save(@Valid @RequestBody DonorCreateDto donorDto) {
+    public ResponseEntity<DonorResponseDto> create(@Valid @RequestBody DonorCreateDto donorDto) {
         Donor donor = donorService.save(DonorMapper.toDonor(donorDto));
-        return ResponseEntity.status(HttpStatus.CREATED).body(donor);
+        return ResponseEntity.status(HttpStatus.CREATED).body(DonorMapper.toDto(donor));
     }
 }
