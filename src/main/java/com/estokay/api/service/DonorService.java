@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class DonorService {
 
-    private DonorRepository donorRepository;
+    private final DonorRepository donorRepository;
 
     @Transactional
     public Donor save(Donor donor) {

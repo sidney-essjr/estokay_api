@@ -1,6 +1,7 @@
 package com.estokay.api.entity;
 
 import jakarta.persistence.*;
+import jdk.jfr.BooleanFlag;
 import lombok.*;
 
 import java.util.Objects;
@@ -39,7 +40,7 @@ public abstract class Person {
     private String state;
 
     @Column(name = "is_active", nullable = false)
-    private boolean isActive;
+    private boolean isActive = true;
 
     @Override
     public boolean equals(Object o) {
