@@ -3,11 +3,9 @@ package com.estokay.api.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Objects;
-
 @Entity
+@Table(name = "Donors")
 @Getter @Setter @ToString
-@DiscriminatorValue("Donor")
 @AllArgsConstructor @NoArgsConstructor
 public class Donor extends Person {
 
