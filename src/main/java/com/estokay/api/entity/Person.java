@@ -27,16 +27,16 @@ public abstract class Person {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "code", nullable = true, length = 20)
+    @Column(name = "code", length = 20)
     private String code;
 
-    @Column(name = "address", length = 255)
+    @Column(name = "address")
     private String address;
 
-    @Column(name = "city", nullable = false, length = 255)
+    @Column(name = "city", nullable = false)
     private String city;
 
-    @Column(name = "state", nullable = false, length = 255)
+    @Column(name = "state", nullable = false)
     private String state;
 
     @Column(name = "is_active", nullable = false)
