@@ -44,6 +44,10 @@ public class DonorController {
         return ResponseEntity.noContent().build();
     }
 
-
+    @PatchMapping("/{id}/add-donations-made")
+    public ResponseEntity<Void> addDonationsMade(@PathVariable long id) {
+        donorService.addDonationsMade(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

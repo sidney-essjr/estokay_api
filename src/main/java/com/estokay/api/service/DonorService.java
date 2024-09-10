@@ -48,6 +48,12 @@ public class DonorService {
         BeanUtils.copyProperties(dto, donor, getNullPropertyNames(dto));
     }
 
+    @Transactional
+    public void addDonationsMade(long id) {
+        Donor donor = findById(id);
+        donor.setDonationsMade(donor.getDonationsMade() + 1);
+    }
+
     private String[] getNullPropertyNames(Object source) {
         final BeanWrapper src = new BeanWrapperImpl(source);
         java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();
@@ -60,4 +66,5 @@ public class DonorService {
         }
         return nullPropertyNames.toArray(new String[0]);
     }
+
 }
