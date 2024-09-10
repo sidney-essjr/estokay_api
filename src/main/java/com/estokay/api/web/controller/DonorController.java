@@ -9,10 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,5 +22,11 @@ public class DonorController {
     public ResponseEntity<DonorResponseDto> create(@Valid @RequestBody DonorCreateDto donorDto) {
         Donor donor = donorService.save(DonorMapper.toDonor(donorDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(DonorMapper.toDto(donor));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DonorResponseDto> getById(@PathVariable long id) {
+        Donor donor = donorService.getById(id);
+        return ResponseEntity.ok(DonorMapper.toDto(donor));
     }
 }
