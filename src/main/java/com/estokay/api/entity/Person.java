@@ -1,7 +1,6 @@
 package com.estokay.api.entity;
 
 import jakarta.persistence.*;
-import jdk.jfr.BooleanFlag;
 import lombok.*;
 
 import java.util.Objects;
