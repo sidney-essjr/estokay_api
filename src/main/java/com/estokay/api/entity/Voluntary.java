@@ -18,7 +18,7 @@ public class Voluntary extends Person {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
-    private Role role;
+    private Role role = Role.ROLE_USER;
 
     @ManyToOne
     @JoinColumn(name = "audit_id")

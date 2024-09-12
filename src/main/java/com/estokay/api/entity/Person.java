@@ -7,14 +7,15 @@ import java.util.Objects;
 
 @Entity
 @Getter @Setter
+@Table(name = "People")
 @AllArgsConstructor @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Person {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     @Column(name = "name", length = 100, nullable = false)
     private String name;
