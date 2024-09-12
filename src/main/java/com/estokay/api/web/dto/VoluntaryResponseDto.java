@@ -1,15 +1,12 @@
 package com.estokay.api.web.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @ToString
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DonorResponseDto {
+public class VoluntaryResponseDto {
 
     private long id;
 
@@ -27,8 +24,10 @@ public class DonorResponseDto {
 
     private String state;
 
-    private int donationsMade;
-
     private boolean isActive;
+
+    private String document;
+
+    private String role;
 
 }

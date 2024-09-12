@@ -3,12 +3,14 @@ package com.estokay.api.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter @ToString
 @Table(name = "Item_Types")
-public class ItemType {
+public class ItemType implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor @NoArgsConstructor
 public class Voluntary extends Person {
 
-    @Column(name = "document", nullable = false)
+    @Column(name = "document", nullable = false, unique = true)
     private String document;
 
     @Column(name = "password", nullable = false)

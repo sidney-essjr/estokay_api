@@ -3,6 +3,7 @@ package com.estokay.api.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
@@ -10,7 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter @Setter @ToString
 @Table(name = "Donations")
-public class Donation {
+public class Donation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

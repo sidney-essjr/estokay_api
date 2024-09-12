@@ -3,6 +3,7 @@ package com.estokay.api.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
 @Table(name = "audit_logs")
 @Getter @Setter @ToString
 @AllArgsConstructor @NoArgsConstructor
-public class AuditLog {
+public class AuditLog implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
