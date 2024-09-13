@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class VoluntaryService {
@@ -31,5 +33,10 @@ public class VoluntaryService {
     @Transactional(readOnly = true)
     public Voluntary findById(long id) {
         return voluntaryRepository.findById(id).get();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Voluntary> findAll() {
+        return voluntaryRepository.findAll();
     }
 }

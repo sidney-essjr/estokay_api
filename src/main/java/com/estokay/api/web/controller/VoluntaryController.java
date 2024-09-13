@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/volunteers")
@@ -28,6 +30,12 @@ public class VoluntaryController {
     public ResponseEntity<VoluntaryResponseDto> findById(@PathVariable long id) {
         Voluntary voluntary = voluntaryService.findById(id);
         return ResponseEntity.ok(VoluntaryMapper.toDto(voluntary));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<VoluntaryResponseDto>> findAll() {
+        List<Voluntary> volunteers = voluntaryService.findAll();
+        return ResponseEntity.ok(VoluntaryMapper.toListDto(volunteers));
     }
 
 }

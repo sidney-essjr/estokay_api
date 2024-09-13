@@ -7,6 +7,9 @@ import com.estokay.api.web.dto.VoluntaryResponseDto;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class VoluntaryMapper {
 
     public static Voluntary toVoluntary(VoluntaryCreateDto dto) {
@@ -27,5 +30,9 @@ public class VoluntaryMapper {
         mapper.addMappings(props);
 
         return mapper.map(voluntary, VoluntaryResponseDto.class);
+    }
+
+    public static List<VoluntaryResponseDto> toListDto(List<Voluntary> volunteers) {
+        return volunteers.stream().map(VoluntaryMapper::toDto).collect(Collectors.toList());
     }
 }
