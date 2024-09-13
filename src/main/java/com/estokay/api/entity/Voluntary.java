@@ -21,7 +21,7 @@ public class Voluntary extends Person {
     private Role role = Role.ROLE_USER;
 
     @ManyToOne
-    @JoinColumn(name = "audit_id")
+    @JoinColumn(name = "audit_id", nullable = false)
     private AuditLog audit;
 
     public enum Role {

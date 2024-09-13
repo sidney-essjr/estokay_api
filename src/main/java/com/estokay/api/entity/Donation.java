@@ -43,7 +43,7 @@ public class Donation implements Serializable {
     private Movement movement;
 
     @ManyToOne
-    @JoinColumn(name = "audit_id")
+    @JoinColumn(name = "audit_id", nullable = false)
     private AuditLog audit;
 
     public enum Size {

@@ -15,7 +15,7 @@ public class Donor extends Person implements Serializable {
     private int donationsMade;
 
     @ManyToOne
-    @JoinColumn(name = "audit_id")
+    @JoinColumn(name = "audit_id", nullable = false)
     private AuditLog audit;
 
 }

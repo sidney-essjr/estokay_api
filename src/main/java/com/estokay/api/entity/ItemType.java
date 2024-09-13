@@ -23,4 +23,8 @@ public class ItemType implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "audit_id", nullable = false)
+    private AuditLog audit;
+
 }
