@@ -32,7 +32,9 @@ public class VoluntaryService {
 
     @Transactional(readOnly = true)
     public Voluntary findById(long id) {
-        return voluntaryRepository.findById(id).get();
+        return voluntaryRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("The id entity %d was not found", id))
+        );
     }
 
     @Transactional(readOnly = true)
