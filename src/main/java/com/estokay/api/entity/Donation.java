@@ -39,6 +39,9 @@ public class Donation implements Serializable {
     @Column(name = "validate")
     private LocalDate validate;
 
+    @Column(name = "movement", nullable = false)
+    private Movement movement;
+
     @ManyToOne
     @JoinColumn(name = "audit_id")
     private AuditLog audit;
@@ -49,5 +52,9 @@ public class Donation implements Serializable {
 
     public enum Measure {
         MEASURE_KG, MEASURE_L, MEASURE_UN, MEASURE_CM
+    }
+
+    public enum Movement {
+        MOVEMENT_INBOUND, MOVEMENT_OUTBOUND
     }
 }
