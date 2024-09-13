@@ -17,9 +17,6 @@ public class AuditLog implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "record_id")
-    private long recordId;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "Operation", nullable = false, length = 20)
     private Operation operationType = Operation.INSERT;
@@ -27,14 +24,16 @@ public class AuditLog implements Serializable {
     @Column(name = "created_in", nullable = false)
     private LocalDateTime createdIn;
 
-    @Column(name = "created_by", nullable = false)
-    private String createdBy;
+    @ManyToOne
+    @JoinColumn(name = "id_created", nullable = false)
+    private Voluntary createdBy;
 
     @Column(name = "changed_at", nullable = false)
     private LocalDateTime changedAt;
 
-    @Column(name = "changed_by", nullable = false)
-    private String changedBy;
+    @ManyToOne
+    @JoinColumn(name = "id_changed", nullable = false)
+    private Voluntary changedBy;
 
     @Column(name = "old_value")
     private String oldValue;

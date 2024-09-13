@@ -5,7 +5,11 @@ import com.estokay.api.entity.Voluntary;
 import com.estokay.api.exception.EmailUniqueViolationException;
 import com.estokay.api.exception.EntityNotFoundException;
 import com.estokay.api.repository.VoluntaryRepository;
+import com.estokay.api.web.dto.VoluntaryCreateDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,9 +24,6 @@ public class VoluntaryService {
     @Transactional
     public Voluntary save(Voluntary voluntary) {
         try {
-            AuditLog audit = new AuditLog();
-            audit.setId(1);
-            voluntary.setAudit(audit);
         return voluntaryRepository.save(voluntary);
         } catch (org.springframework.dao.DataIntegrityViolationException ex) {
             throw new EmailUniqueViolationException(String.format(
@@ -40,5 +41,24 @@ public class VoluntaryService {
     @Transactional(readOnly = true)
     public List<Voluntary> findAll() {
         return voluntaryRepository.findAll();
+    }
+
+    @Transactional
+    public void update(long id, VoluntaryCreateDto dto) {
+        Voluntary voluntary = findById(id);
+        BeanUtils.copyProperties(dto, voluntary, getNullPropertyNames(dto));
+    }
+
+    private String[] getNullPropertyNames(Object source) {
+        final BeanWrapper src = new BeanWrapperImpl(source);
+        java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();
+        java.util.List<String> nullPropertyNames = new java.util.ArrayList<>();
+        for (java.beans.PropertyDescriptor pd : pds) {
+            Object srcValue = src.getPropertyValue(pd.getName());
+            if (srcValue == null) {
+                nullPropertyNames.add(pd.getName());
+            }
+        }
+        return nullPropertyNames.toArray(new String[0]);
     }
 }

@@ -38,4 +38,10 @@ public class VoluntaryController {
         return ResponseEntity.ok(VoluntaryMapper.toListDto(volunteers));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable long id, @Valid @RequestBody VoluntaryCreateDto dto) {
+        voluntaryService.update(id, dto);
+        return ResponseEntity.noContent().build();
+    }
+
 }
