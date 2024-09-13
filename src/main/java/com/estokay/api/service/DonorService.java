@@ -1,5 +1,6 @@
 package com.estokay.api.service;
 
+import com.estokay.api.entity.AuditLog;
 import com.estokay.api.entity.Donor;
 import com.estokay.api.exception.EmailUniqueViolationException;
 import com.estokay.api.exception.EntityNotFoundException;
@@ -24,6 +25,9 @@ public class DonorService {
     @Transactional
     public Donor save(Donor donor) {
         try {
+            AuditLog audit = new AuditLog();
+            audit.setId(1);
+            donor.setAudit(audit);
             return donorRepository.save(donor);
         } catch (org.springframework.dao.DataIntegrityViolationException ex) {
             throw new EmailUniqueViolationException(String.format("The donor's email '%s' is already in use", donor.getEmail()));

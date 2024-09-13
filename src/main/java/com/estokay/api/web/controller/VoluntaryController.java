@@ -9,10 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,6 +22,12 @@ public class VoluntaryController {
     public ResponseEntity<VoluntaryResponseDto> create(@Valid @RequestBody VoluntaryCreateDto dto) {
         Voluntary voluntary = voluntaryService.save(VoluntaryMapper.toVoluntary(dto));
         return ResponseEntity.status(HttpStatus.CREATED).body(VoluntaryMapper.toDto(voluntary));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<VoluntaryResponseDto> findById(@PathVariable long id) {
+        Voluntary voluntary = voluntaryService.findById(id);
+        return ResponseEntity.ok(VoluntaryMapper.toDto(voluntary));
     }
 
 }

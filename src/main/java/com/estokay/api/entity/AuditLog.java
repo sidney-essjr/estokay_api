@@ -22,7 +22,7 @@ public class AuditLog implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "Operation", nullable = false, length = 20)
-    private Operation operationType = Operation.UNCHANGED;
+    private Operation operationType = Operation.INSERT;
 
     @Column(name = "created_in", nullable = false)
     private LocalDateTime createdIn;
@@ -40,7 +40,7 @@ public class AuditLog implements Serializable {
     private String oldValue;
 
     public enum Operation {
-        INSERT, UPDATE, DELETE, UNCHANGED
+        INSERT, UPDATE, DELETE
     }
 
     @Override
