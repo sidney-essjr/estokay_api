@@ -24,13 +24,10 @@ public class Distribution {
 
     @OneToMany
     @JoinColumn(name = "distribution_id", nullable = false)
+    @ToString.Exclude
     private List<Donation> donations;
 
     @Column(name = "distribution_date", nullable = false)
     private LocalDateTime distributionDate;
-
-    @ManyToOne
-    @JoinColumn(name = "audit_id", nullable = false)
-    private AuditLog audit;
 
 }

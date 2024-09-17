@@ -42,10 +42,6 @@ public class Donation implements Serializable {
     @Column(name = "movement", nullable = false)
     private Movement movement;
 
-    @ManyToOne
-    @JoinColumn(name = "audit_id", nullable = false)
-    private AuditLog audit;
-
     public enum Size {
         SIZE_SMALL, SIZE_MEDIUM, SIZE_LARGE
     }

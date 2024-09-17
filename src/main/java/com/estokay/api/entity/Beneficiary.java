@@ -30,7 +30,4 @@ public class Beneficiary {
     @Column(name = "donations_received")
     private int donationsReceived;
 
-    @ManyToOne
-    @JoinColumn(name = "audit_id", nullable = false)
-    private AuditLog audit;
 }

@@ -21,22 +21,20 @@ public class AuditLog implements Serializable {
     @Column(name = "Operation", nullable = false, length = 20)
     private Operation operationType = Operation.INSERT;
 
-    @Column(name = "created_in", nullable = false)
-    private LocalDateTime createdIn;
-
-    @ManyToOne
-    @JoinColumn(name = "id_created", nullable = false)
-    private Voluntary createdBy;
-
     @Column(name = "changed_at", nullable = false)
     private LocalDateTime changedAt;
 
-    @ManyToOne
-    @JoinColumn(name = "id_changed", nullable = false)
-    private Voluntary changedBy;
-
-    @Column(name = "old_value")
+    @Column(name = "old_value", nullable = false)
     private String oldValue;
+
+    @Column(name = "class_name", nullable = false)
+    private String className;
+
+    @Column(name = "class_id", nullable = false)
+    private Long classId;
+
+    @Column(name = "record_id", nullable = false)
+    private Long recordId;
 
     public enum Operation {
         INSERT, UPDATE, DELETE

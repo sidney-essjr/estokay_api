@@ -3,12 +3,14 @@ package com.estokay.api.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "Volunteers")
 @Getter @Setter @ToString
 @DiscriminatorValue("Voluntary")
 @AllArgsConstructor @NoArgsConstructor
-public class Voluntary extends Person {
+public class Voluntary extends Person implements Serializable {
 
     @Column(name = "document", nullable = false, unique = true)
     private String document;
@@ -19,10 +21,6 @@ public class Voluntary extends Person {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private Role role = Role.ROLE_USER;
-
-    @ManyToOne
-    @JoinColumn(name = "audit_id", nullable = false)
-    private AuditLog audit;
 
     public enum Role {
         ROLE_ADMIN, ROLE_USER
