@@ -1,11 +1,14 @@
 package com.estokay.api.service;
 
+import com.estokay.api.entity.AuditLog;
 import com.estokay.api.entity.Donor;
+import com.estokay.api.entity.Voluntary;
 import com.estokay.api.exception.EmailUniqueViolationException;
 import com.estokay.api.exception.EntityNotFoundException;
 import com.estokay.api.repository.DonorRepository;
 import com.estokay.api.web.dto.DonorCreateDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -15,15 +18,27 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class DonorService {
 
     private final DonorRepository donorRepository;
+    private final AuditLogService<Donor> auditLogService;
 
     @Transactional
     public Donor save(Donor donor) {
         try {
-            return donorRepository.save(donor);
+            // substituir pelo usuário no contexto do spring security
+            Voluntary voluntary = new Voluntary();
+            voluntary.setId(1L);
+
+            Donor createdDonor = donorRepository.save(donor);
+
+            AuditLog auditLog = auditLogService.save(voluntary, createdDonor, AuditLog.Operation.INSERT);
+
+            log.info(auditLog.toString());
+
+            return createdDonor;
         } catch (org.springframework.dao.DataIntegrityViolationException ex) {
             throw new EmailUniqueViolationException(String.format("The donor's email '%s' is already in use", donor.getEmail()));
         }

@@ -1,5 +1,6 @@
 package com.estokay.api.entity;
 
+import com.estokay.api.interfaces.Identifiable;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +10,7 @@ import java.io.Serializable;
 @Table(name = "Donors")
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
-public class Donor extends Person implements Serializable {
+public class Donor extends Person implements Identifiable, Serializable {
 
     @Column(name = "donations_made")
     private int donationsMade;
